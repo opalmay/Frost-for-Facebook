@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.bugsnag.android.gradle'
+apply plugin: 'com.bugsnag.android.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.gladed.androidgitversion'
 
 
@@ -35,9 +35,9 @@ android {
         applicationId "${project.APP_GROUP}.${project.APP_ID.toLowerCase(Locale.CANADA)}"
         minSdkVersion kau.Versions.minSdk
         targetSdkVersion Versions.targetSdk
-//        versionCode 2040500
+//        versionCode 2040700
         versionCode androidGitVersion.code()
-//        versionName '2.4.5'
+//        versionName '2.4.7'
         versionName androidGitVersion.name()
 
         if (System.getenv('TRAVIS') != 'true') {
@@ -48,12 +48,12 @@ android {
             if (versionName != androidGitVersion.name()) {
                 throw new GradleException("Version name mismatch, expected ${androidGitVersion.name()}, got $versionName")
             }
-            multiDexEnabled true
-            testInstrumentationRunner "com.pitchedapps.frost.FrostTestRunner"
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = ["room.schemaLocation": "$projectDir/src/schemas".toString()]
-                }
+        }
+        multiDexEnabled true
+        testInstrumentationRunner "com.pitchedapps.frost.FrostTestRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/src/schemas".toString()]
             }
         }
     }
